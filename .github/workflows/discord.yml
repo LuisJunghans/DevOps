@@ -1,0 +1,15 @@
+name: Discord
+on:
+  - push
+
+jobs:
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Discord Webhook
+        uses: Sniddl/discord-commits@v1.6
+        with: 
+          webhook: https://discord.com/api/webhooks/1366182545955487765/R5pIxDnaDhb4FYkVtOCRAhxOuHMOjgPBVSOC6KmZha-PbJ-vRpUekUX032dF-nSnDZ9W
+          template: "avatar-with-link"
+          include-extras: true
