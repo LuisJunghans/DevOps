@@ -24,7 +24,7 @@ class FlaskTestCase(unittest.TestCase):
             username="fakeuser",
             password="fakepass"
         ), follow_redirects=True)
-        self.assertIn(b'Usu\xc3\xa1rio ou senha incorretos', response.data)
+        self.assertIn(b'Usuario ou senha incorretos', response.data)
 
 if __name__ == '__main__':
     unittest.main()
