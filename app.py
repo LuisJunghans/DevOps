@@ -82,7 +82,12 @@ def login():
             session['user'] = username
             return redirect(url_for('dashboard'))
         else:
-            return "<h2>Usuário ou senha incorretos! ❌</h2>"
+            return '''
+                <h2>Usuário ou senha incorretos! ❌</h2>
+                <form action="/login" method="get">
+                    <button type="submit">Tentar Novamente</button>
+                </form>
+            '''
 
     return '''
     <h1>Login</h1>
