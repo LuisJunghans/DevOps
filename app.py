@@ -22,7 +22,7 @@ def is_valid_password(password):
         return False
     has_uppercase = any(c.isupper() for c in password)
     has_digit = any(c.isdigit() for c in password)
-    has_special = any(c in string.punctuation for c in password)
+    #has_special = any(c in string.punctuation for c in password)
     return has_uppercase and has_digit
 
 @app.route('/')
