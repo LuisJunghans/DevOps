@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template_string, redirect, url_for, session, send_from_directory
 import json
 import os
+import string
 
 app = Flask(__name__)
 app.secret_key = "admin"
@@ -21,6 +22,7 @@ def is_valid_password(password):
         return False
     has_uppercase = any(c.isupper() for c in password)
     has_digit = any(c.isdigit() for c in password)
+    has_special = any(c in string.punctuation for c in password)
     return has_uppercase and has_digit
 
 @app.route('/')

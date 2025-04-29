@@ -5,7 +5,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
 
 class FlaskTestCase(unittest.TestCase):
-
     # Configura o app para teste
     def setUp(self):
         app.config['TESTING'] = True
@@ -28,6 +27,14 @@ class FlaskTestCase(unittest.TestCase):
             password="fakepass"
         ), follow_redirects=True)
         self.assertIn(b'Usu\xc3\xa1rio ou senha incorretos', response.data)
+
+    def test_register_with_special_char_password(self):
+        response = self.app.post('/register', data=dict(
+            username="usuarioTesteEspecial",
+            password="Senha123!",
+        ), follow_redirects=True)
+        self.assertIn(b'Login', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
