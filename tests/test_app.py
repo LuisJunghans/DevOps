@@ -6,8 +6,8 @@ from app import app
 
 class FlaskTestCase(unittest.TestCase):
 
+    # Configura o app para teste
     def setUp(self):
-        # Configura o app para teste
         app.config['TESTING'] = True
         app.config['SECRET_KEY'] = 'test_secret'
         self.app = app.test_client()
