@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 import unittest
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
@@ -10,6 +11,10 @@ class FlaskTestCase(unittest.TestCase):
         app.config['TESTING'] = True
         app.config['SECRET_KEY'] = 'test_secret'
         self.app = app.test_client()
+
+         # Limpa o arquivo de usuários antes de cada teste
+    with open('users.json', 'w') as f:
+        f.write('{}')
 
     def test_register_page_loads(self):
         response = self.app.get('/register')
@@ -29,8 +34,9 @@ class FlaskTestCase(unittest.TestCase):
         self.assertIn(b'Usu\xc3\xa1rio ou senha incorretos', response.data)
 
     def test_register_with_special_char_password(self):
+        unique_username = f"usuarioTeste{int(time.time())}"
         response = self.app.post('/register', data=dict(
-            username="usuarioTesteEspecial",
+            username=unique_username,
             password="Senha123!",
         ), follow_redirects=True)
         self.assertIn(b'Login', response.data)
